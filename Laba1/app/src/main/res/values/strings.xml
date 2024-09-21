@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Laba1</string>
+    <string name="mynameButton">My name</string>
+    <string name="XButton">X</string>
+    <string name="emptyVal"></string>
+    <string name="myName">Karol Liza</string>
 </resources>

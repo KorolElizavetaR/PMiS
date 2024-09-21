@@ -1,6 +1,9 @@
 package com.example.laba1
 
+
+import android.content.res.Resources
 import android.os.Bundle
+import android.provider.Settings.Secure.getString
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -21,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.laba1.ui.theme.Laba1Theme
@@ -47,6 +51,8 @@ fun Greeting(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center)
     {
+        val MyName = stringResource(id = R.string.myName)
+        val emptyValue = stringResource(id = R.string.emptyVal)
         var TextObject by rememberSaveable  { mutableStateOf("") }
         Text(
             text = TextObject,
@@ -56,18 +62,18 @@ fun Greeting(modifier: Modifier = Modifier) {
             Button(
                 onClick =
                 {
-                    TextObject = "Karol Liza"
+                    TextObject = MyName
                 }
             ) {
-                Text(text = "My name")
+                Text(text = stringResource(id = R.string.mynameButton))
             }
             Button(
                 onClick =
                 {
-                    TextObject = ""
+                    TextObject = emptyValue
                 }
             ) {
-                Text(text = "X")
+                Text(text = stringResource(id = R.string.XButton))
             }
         }
     }
@@ -78,7 +84,7 @@ fun Greeting(modifier: Modifier = Modifier) {
             painter = painterResource(id = R.drawable.cat),
             contentDescription = "Cat",
             modifier = modifier
-                .padding(horizontal =  4.dp)
+                .padding(horizontal = 4.dp)
                 .padding(vertical = 4.dp)
         )
     }
