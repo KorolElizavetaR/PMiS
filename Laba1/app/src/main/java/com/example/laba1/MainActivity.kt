@@ -62,7 +62,7 @@ fun Greeting(modifier: Modifier = Modifier) {
             Button(
                 onClick =
                 {
-                    TextObject = MyName
+                    TextObject = "i am $MyName"
                 }
             ) {
                 Text(text = stringResource(id = R.string.mynameButton))
