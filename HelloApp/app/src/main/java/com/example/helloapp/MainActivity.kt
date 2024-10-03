@@ -53,7 +53,7 @@ fun Greeting(modifier: Modifier = Modifier) {
         var MyName by remember{mutableStateOf("Student")}
         var textValue by remember{ mutableStateOf("") }
         Text(
-            text = "Greetings, $MyName!",
+            text = "Greetings,\n\n$MyName!",
             modifier = modifier.padding(16.dp),
             fontSize = 48.sp
         )

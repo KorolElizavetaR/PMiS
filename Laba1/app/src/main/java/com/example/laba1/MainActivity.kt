@@ -53,6 +53,7 @@ fun Greeting(modifier: Modifier = Modifier) {
     {
         val MyName = stringResource(id = R.string.myName)
         val emptyValue = stringResource(id = R.string.emptyVal)
+
         var TextObject by rememberSaveable  { mutableStateOf("") }
         Text(
             text = TextObject,
