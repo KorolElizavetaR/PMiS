@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.laba1"
+    namespace = "com.start.laba3start"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.laba1"
+        applicationId = "com.start.laba3start"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -51,7 +51,6 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

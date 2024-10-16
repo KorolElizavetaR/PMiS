@@ -61,6 +61,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting() {
     val navController = rememberNavController()
     Column(Modifier.padding(8.dp)) {
+        NotBottomNavigationBar(navController = navController)
         NavHost(
             navController, startDestination = NavRoutes.Home.route, modifier
             = Modifier.weight(1f)
@@ -68,12 +69,12 @@ fun Greeting() {
             composable(NavRoutes.Home.route) { Home(modifier = Modifier.padding(8.dp)) }
             composable(NavRoutes.About.route) { About() }
         }
-        BottomNavigationBar(navController = navController)
+
     }
 }
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun NotBottomNavigationBar(navController: NavController) {
     NavigationBar {
         val backStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = backStackEntry?.destination?.route
