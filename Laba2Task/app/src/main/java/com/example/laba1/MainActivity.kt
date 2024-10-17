@@ -5,10 +5,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,6 +47,9 @@ import com.example.laba1.ui.theme.Laba1Theme
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +73,7 @@ fun Greeting() {
             = Modifier.weight(1f)
         ) {
             composable(NavRoutes.Home.route) { Home(modifier = Modifier.padding(8.dp)) }
-            composable(NavRoutes.About.route) { About() }
+            composable(NavRoutes.Poetry.route) { Poetry() }
         }
 
     }
@@ -111,9 +117,9 @@ object NavBarItems {
             route = "home"
         ),
         BarItem(
-            title = "Что тут?",
+            title = "Стишки!!",
             image = Icons.Filled.Info,
-            route = "about"
+            route = "poetry"
         )
     )
 }
@@ -171,15 +177,18 @@ fun Home(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun About() {
+fun Poetry() {
     val navController = rememberNavController()
-    val verses = listOf(
-        Poem(1, stringResource(id = R.string.author1), stringResource(id = R.string.verse1)),
-        Poem(2, stringResource(id = R.string.author2), stringResource(id = R.string.verse2))
-    )
-    NavHost(navController, startDestination = VerseRoutes.Authors.route) {
-        composable(VerseRoutes.Authors.route) { Author(verses, navController) }
-        composable(VerseRoutes.Verses.route + "/{id}",
+
+        var id = 1;
+        val verses = listOf(
+            Poem(id++, stringResource(id = R.string.author1), "Совесть", stringResource(id = R.string.verse1)),
+            Poem(id++, stringResource(id = R.string.author1), "Жук", stringResource(id = R.string.verse2)),
+            Poem(id++, stringResource(id = R.string.author3), "Студенты", stringResource(id = R.string.verse3)),
+        )
+    NavHost(navController, startDestination = NavRoutes.Poetry.route) {
+        composable(NavRoutes.Poetry.route) { VerseListScreen(navController, verses) }
+        composable(NavRoutes.Verses.route + "/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType }))
         {
                 stackEntry ->
@@ -189,21 +198,34 @@ fun About() {
     }
 }
 
-sealed class VerseRoutes(val route: String) {
-    object Authors : VerseRoutes("author")
-    object Verses : VerseRoutes("verse")
-}
-
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Author(data: List<Poem>, navController: NavController){
-    LazyColumn {
-        items(data){
-                u->
-            Row(Modifier.fillMaxWidth()){
-                Text(u.authorandname,
-                    Modifier.padding(8.dp).clickable {
-                        navController.navigate("verse/${u.id}") },
-                    fontSize = 28.sp)
+fun VerseListScreen(navController: NavController, poems: List<Poem>) {
+    val groupPoems = poems.groupBy { it.author }
+
+    LazyColumn(contentPadding = PaddingValues(5.dp)) {
+        groupPoems.forEach { (author, verses) ->
+            stickyHeader {
+                Text(
+                    text = author,
+                    fontSize = 28.sp,
+                    color = Color.White,
+                    modifier = Modifier
+                        .background(Color.Gray)
+                        .padding(5.dp)
+                        .fillMaxWidth()
+                )
+            }
+            items(verses) { verse ->
+                Text(
+                    text = verse.name,
+                    fontSize = 28.sp,
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .clickable {
+                            navController.navigate(NavRoutes.Verses.route+"/${verse.id}")
+                        }
+                )
             }
         }
     }
@@ -213,8 +235,9 @@ fun Author(data: List<Poem>, navController: NavController){
 fun Verse(id:Int?, data: List<Poem>){
     val verse = data.find { it.id==id }
     if(verse!=null) {
-        Column {
-            Text("${verse.verse}", Modifier.padding(8.dp), fontSize = 20.sp)
+        Column(modifier = Modifier.padding(16.dp).verticalScroll(rememberScrollState())) {
+            Text(text = verse.name, fontSize = 32.sp)
+            Text(text = verse.verse, fontSize = 20.sp)
         }
     }
     else{
@@ -224,7 +247,8 @@ fun Verse(id:Int?, data: List<Poem>){
 
 sealed class NavRoutes(val route: String) {
     object Home : NavRoutes("home")
-    object About : NavRoutes("about")
+    object Poetry : NavRoutes("poetry")
+    object Verses : NavRoutes("verse")
 }
 
-data class Poem(val id: Int, val authorandname:String, val verse:String)
+data class Poem(val id: Int, val author:String, val name:String, val verse:String)

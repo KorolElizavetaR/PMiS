@@ -4,9 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
@@ -42,6 +46,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
@@ -62,7 +67,9 @@ class MainActivity : ComponentActivity() {
             // Content5()
             // Content6()
             // animation()
-            animateCircle()
+            // animateCircle()
+            // changeColor()
+            rotate()
         }
     }
 }
@@ -251,8 +258,57 @@ fun animateCircle()
     }
 }
 
+@Composable
 fun changeColor()
-{}
+{
+    var colorState by remember { mutableStateOf(Color.DarkGray) }
+    val animatedColor: Color by animateColorAsState(
+        targetValue = colorState,
+        animationSpec = keyframes {
+            durationMillis = 3000
+            Color.Blue at 500
+            Color.Green at 1500
+            Color.Yellow at 2500
+        }
+    )
+    Column(Modifier.fillMaxWidth(),
+        horizontalAlignment= Alignment.CenterHorizontally) {
+        Box(Modifier.padding(20.dp)
+            .size(200.dp)
+            .background(animatedColor))
+        Button(
+            {colorState = if (colorState == Color.Red) {Color.DarkGray}
+            else {Color.Red}},
+            Modifier.padding(10.dp))
+        {
+            Text("Изменить цвет", fontSize = 22.sp)
+        }
+    }
+}
+
+@Composable
+fun rotate()
+{
+    var rotated by remember { mutableStateOf(false) }
+    val angle by animateFloatAsState(
+        targetValue = if (rotated) 360f else 0f,
+        animationSpec = tween(4000)
+    )
+    Column(Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(Modifier.padding(20.dp)
+            .size(200.dp)
+                .background(Color.LightGray)
+                .rotate(angle),
+            Alignment.Center){
+            Box(Modifier.size(width=200.dp,height=20.dp)
+                .background(Color.DarkGray))}
+        Button({rotated = !rotated},
+            Modifier.padding(10.dp)) {
+            Text(text = "Повернуть")
+        }
+    }
+}
 
 data class Language(val name:String, val hexColor: Long)
 data class Person(val name:String, val company: String)
