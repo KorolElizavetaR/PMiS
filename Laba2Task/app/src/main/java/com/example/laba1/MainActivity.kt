@@ -5,17 +5,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
@@ -49,8 +55,12 @@ import androidx.navigation.navArgument
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.Dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,17 +85,68 @@ fun Greeting() {
         ) {
             composable(NavRoutes.Home.route) { Home(modifier = Modifier.padding(8.dp)) }
             composable(NavRoutes.Poetry.route) { Poetry() }
-            composable(NavRoutes.ADHD.route) { FlyingCapybara() }
+            composable(NavRoutes.ADHD.route) { GetReal() }
+            composable(NavRoutes.Capybara.route) { Capybara() }
         }
 
     }
 }
 
 @Composable
-fun FlyingCapybara()
+fun GetReal()
 {
-    Text("Hi")
+    var imageState by rememberSaveable { mutableStateOf(R.drawable.gordon) }
+    Column(
+        Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            Modifier.padding(20.dp)
+                .size(300.dp)
+        ) {
+            Crossfade (targetState = imageState) { currentImage ->
+                Image(
+                    painter = painterResource(id = currentImage),
+                    contentDescription = "Get real!!",
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+        }
+        Button(
+            onClick = {
+                imageState = if (imageState == R.drawable.gordon) R.drawable.waltuh else R.drawable.gordon
+            },
+            Modifier.padding(10.dp)
+        ) {
+            Text("get real", fontSize = 22.sp)
+        }
+    }
 }
+
+@Composable
+fun Capybara()
+{
+    val startOffset = 0
+    val pictureSize = 200
+    val endOffset = LocalConfiguration.current.screenWidthDp - pictureSize
+
+    var capybaraState by rememberSaveable { mutableStateOf(startOffset)}
+
+    val offset by animateDpAsState(targetValue = capybaraState.dp)
+    Column(Modifier.fillMaxWidth()) {
+        Box(Modifier.padding(start=offset).size(pictureSize.dp)
+        )
+        {
+            Image(
+                painter = painterResource(id = R.drawable.capybara),
+                contentDescription = "capybrr"
+            )
+        }
+        Button ({capybaraState = if (capybaraState==startOffset){endOffset} else {startOffset}},
+            Modifier.padding(10.dp)) {Text("brrrr", fontSize = 25.sp) }
+    }
+}
+
 
 @Composable
 fun NotBottomNavigationBar(navController: NavController) {
@@ -130,9 +191,14 @@ object NavBarItems {
             route = NavRoutes.Poetry.route
         ),
         BarItem(
-            title = "СДВГ",
+            title = "Get real",
             image = Icons.Filled.Menu,
             route = NavRoutes.ADHD.route
+        ),
+        BarItem(
+            title = "Капибара",
+            image = Icons.Filled.FavoriteBorder,
+            route = NavRoutes.Capybara.route
         )
     )
 }
@@ -263,6 +329,7 @@ sealed class NavRoutes(val route: String) {
     object Poetry : NavRoutes("poetry")
     object Verses : NavRoutes("verse")
     object ADHD : NavRoutes("adhd")
+    object Capybara : NavRoutes("capybere")
 }
 
 data class Poem(val id: Int, val author:String, val name:String, val verse:String)
