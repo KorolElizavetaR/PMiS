@@ -49,6 +49,7 @@ import androidx.navigation.navArgument
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
@@ -74,9 +75,16 @@ fun Greeting() {
         ) {
             composable(NavRoutes.Home.route) { Home(modifier = Modifier.padding(8.dp)) }
             composable(NavRoutes.Poetry.route) { Poetry() }
+            composable(NavRoutes.ADHD.route) { FlyingCapybara() }
         }
 
     }
+}
+
+@Composable
+fun FlyingCapybara()
+{
+    Text("Hi")
 }
 
 @Composable
@@ -114,12 +122,17 @@ object NavBarItems {
         BarItem(
             title = "Главная",
             image = Icons.Filled.Home,
-            route = "home"
+            route = NavRoutes.Home.route
         ),
         BarItem(
             title = "Стишки!!",
             image = Icons.Filled.Info,
-            route = "poetry"
+            route = NavRoutes.Poetry.route
+        ),
+        BarItem(
+            title = "СДВГ",
+            image = Icons.Filled.Menu,
+            route = NavRoutes.ADHD.route
         )
     )
 }
@@ -249,6 +262,7 @@ sealed class NavRoutes(val route: String) {
     object Home : NavRoutes("home")
     object Poetry : NavRoutes("poetry")
     object Verses : NavRoutes("verse")
+    object ADHD : NavRoutes("adhd")
 }
 
 data class Poem(val id: Int, val author:String, val name:String, val verse:String)
