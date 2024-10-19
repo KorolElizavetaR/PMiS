@@ -1,6 +1,7 @@
 package com.example.laba1
 
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -53,6 +54,8 @@ import com.example.laba1.ui.theme.Laba1Theme
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -61,6 +64,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,29 +100,58 @@ fun Greeting() {
 fun GetReal()
 {
     var imageState by rememberSaveable { mutableStateOf(R.drawable.gordon) }
-    Column(
-        Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box(
-            Modifier.padding(20.dp)
-                .size(300.dp)
+    val configuration = LocalConfiguration.current
+    if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+    {
+        Row(
+            Modifier.fillMaxWidth().padding(8.dp),
         ) {
-            Crossfade (targetState = imageState) { currentImage ->
-                Image(
-                    painter = painterResource(id = currentImage),
-                    contentDescription = "Get real!!",
-                    modifier = Modifier.fillMaxSize()
-                )
+            Box(Modifier.size(300.dp)) {
+                Crossfade(targetState = imageState) { currentImage ->
+                    Image(
+                        painter = painterResource(id = currentImage),
+                        contentDescription = "Get real!!",
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+            }
+            Button(
+                onClick = {
+                    imageState = if (imageState == R.drawable.gordon) R.drawable.waltuh else R.drawable.gordon
+                },
+                modifier = Modifier.padding(10.dp)
+            ) {
+                Text("get real", fontSize = 22.sp)
             }
         }
-        Button(
-            onClick = {
-                imageState = if (imageState == R.drawable.gordon) R.drawable.waltuh else R.drawable.gordon
-            },
-            Modifier.padding(10.dp)
+
+    }
+    else {
+        Column(
+            Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("get real", fontSize = 22.sp)
+            Box(
+                Modifier.padding(20.dp)
+                    .size(300.dp)
+            ) {
+                Crossfade(targetState = imageState) { currentImage ->
+                    Image(
+                        painter = painterResource(id = currentImage),
+                        contentDescription = "Get real!!",
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+            }
+            Button(
+                onClick = {
+                    imageState =
+                        if (imageState == R.drawable.gordon) R.drawable.waltuh else R.drawable.gordon
+                },
+                Modifier.padding(10.dp)
+            ) {
+                Text("get real", fontSize = 22.sp)
+            }
         }
     }
 }
@@ -272,7 +305,7 @@ fun Poetry() {
         {
                 stackEntry ->
             val userId = stackEntry.arguments?.getInt("id")
-            Verse(userId, verses)
+            Verse(navController, userId, verses)
         }
     }
 }
@@ -311,13 +344,37 @@ fun VerseListScreen(navController: NavController, poems: List<Poem>) {
 }
 
 @Composable
-fun Verse(id:Int?, data: List<Poem>){
+fun Verse(navController: NavController, id:Int?, data: List<Poem>){
     val verse = data.find { it.id==id }
     if(verse!=null) {
-        Column(modifier = Modifier.padding(16.dp).verticalScroll(rememberScrollState())) {
-            Text(text = verse.name, fontSize = 32.sp)
-            Text(text = verse.verse, fontSize = 20.sp)
+        val listState = rememberLazyListState()
+        val coroutineScope = rememberCoroutineScope()
+        LazyColumn (state=listState) {
+//            Text(text = verse.name, fontSize = 32.sp)
+//            Text(text = verse.verse, fontSize = 20.sp)
+            item {
+                Text(text = verse.name, fontSize = 32.sp)
+                Button(
+                    onClick = {
+                        navController.navigate(NavRoutes.Poetry.route)
+                    },
+                    Modifier.padding(10.dp)) {Text("back", fontSize = 25.sp)}
+                Text(text = verse.verse, fontSize = 20.sp)
+            }
+            item{Text("В начало",
+                Modifier.padding(8.dp).background(Color.DarkGray).padding(5.dp).clickable {
+                    coroutineScope.launch() {
+                        listState.animateScrollToItem(0)
+                    }
+                }, fontSize = 28.sp, color = Color.White)
+            }
         }
+
+//        Column(modifier = Modifier.padding(16.dp).verticalScroll(rememberScrollState())) {
+//            Text(text = verse.name, fontSize = 32.sp)
+//            Text(text = verse.verse, fontSize = 20.sp)
+//        }
+
     }
     else{
         Text("Poem Not Found")

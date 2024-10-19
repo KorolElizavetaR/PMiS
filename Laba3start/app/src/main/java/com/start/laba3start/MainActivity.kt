@@ -62,14 +62,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             // Content1()
             // Content2()
-            // Content3()
+            Content3()
             // Content4()
             // Content5()
             // Content6()
             // animation()
             // animateCircle()
             // changeColor()
-            rotate()
+            // rotate()
         }
     }
 }
