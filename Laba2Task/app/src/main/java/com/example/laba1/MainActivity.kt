@@ -297,6 +297,11 @@ fun Poetry() {
             Poem(id++, stringResource(id = R.string.author1), "Совесть", stringResource(id = R.string.verse1)),
             Poem(id++, stringResource(id = R.string.author1), "Жук", stringResource(id = R.string.verse2)),
             Poem(id++, stringResource(id = R.string.author3), "Студенты", stringResource(id = R.string.verse3)),
+            Poem(id++, stringResource(id = R.string.author3), "Студенты", stringResource(id = R.string.verse3)),
+            Poem(id++, stringResource(id = R.string.author3), "Студенты", stringResource(id = R.string.verse3)),
+            Poem(id++, stringResource(id = R.string.author3), "Студенты", stringResource(id = R.string.verse3)),
+            Poem(id++, stringResource(id = R.string.author3), "Студенты", stringResource(id = R.string.verse3)),
+            Poem(id++, stringResource(id = R.string.author3), "Студенты", stringResource(id = R.string.verse3))
         )
     NavHost(navController, startDestination = NavRoutes.Poetry.route) {
         composable(NavRoutes.Poetry.route) { VerseListScreen(navController, verses) }
