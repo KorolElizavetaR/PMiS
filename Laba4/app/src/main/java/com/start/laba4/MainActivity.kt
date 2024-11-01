@@ -84,16 +84,15 @@ fun Picks(modifier: Modifier = Modifier) {
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .width(250.dp)
+                    .width(200.dp)
                     .padding(end = 16.dp),
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Top
+                verticalArrangement = Arrangement.Center
             ) {
                 Button(onClick = { imagePicker.launch("image/*") }) {
                     Text(text = "Выбрать изображение")
                 }
                 Button(
-                    modifier = Modifier.padding(top = 16.dp),
                     onClick = {
                         currentUri = ComposeFileProvider.getImageUri(context)
                         val permissionCheckResult = ContextCompat.checkSelfPermission(
@@ -109,6 +108,14 @@ fun Picks(modifier: Modifier = Modifier) {
                 ) {
                     Text(text = "Сделать снимок")
                 }
+                Button(
+                    onClick = {
+                        hasImage = false
+                        imageUri = null
+                    }
+                ) {
+                    Text(text = "Очистить изображение")
+                }
             }
             if (hasImage && imageUri != null) {
                 AsyncImage(
@@ -118,8 +125,6 @@ fun Picks(modifier: Modifier = Modifier) {
                         .weight(1f),
                     contentDescription = "Selected Image"
                 )
-            } else {
-                Spacer(modifier = Modifier.weight(1f))  // Empty space if no image
             }
         }
     }
@@ -134,7 +139,6 @@ fun Picks(modifier: Modifier = Modifier) {
                 Text(text = "Выбрать изображение")
             }
             Button(
-                modifier = Modifier.padding(top = 16.dp),
                 onClick = {
                     currentUri = ComposeFileProvider.getImageUri(context)
                     val permissionCheckResult = ContextCompat.checkSelfPermission(
@@ -149,6 +153,14 @@ fun Picks(modifier: Modifier = Modifier) {
                 }
             ) {
                 Text(text = "Сделать снимок")
+            }
+            Button(
+                onClick = {
+                    hasImage = false
+                    imageUri = null
+                }
+            ) {
+                Text(text = "Очистить изображение")
             }
         }
 
@@ -167,8 +179,6 @@ fun Picks(modifier: Modifier = Modifier) {
                         .weight(1f, fill = true),
                     contentDescription = "Selected Image"
                 )
-            } else {
-                Spacer(modifier = Modifier.weight(1f))
             }
         }
     }
