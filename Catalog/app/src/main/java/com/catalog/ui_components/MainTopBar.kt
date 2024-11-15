@@ -23,8 +23,8 @@ fun MainTopBar(title: String, drawerState: DrawerState) {
             Text(text = title)
         },
         navigationIcon = {
-            IconButton(onClick = { //нажатие на кнопку навигации открывает
-                coroutine.launch { //выдвижную панель
+            IconButton(onClick = {
+                coroutine.launch {
                     drawerState.open()
                 }
             }
