@@ -23,8 +23,10 @@ import kotlinx.coroutines.launch
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
 @Composable
-fun MainScreen(context: Context, darkTheme: Boolean,
-               onThemeToggle: () -> Unit, onClick: (ListItem)->Unit) {
+fun MainScreen(
+    context: Context, darkTheme: Boolean,
+    onThemeToggle: () -> Unit, onClick: (ListItem) -> Unit
+) {
     val dr_list = LocalContext.current.resources.getStringArray(R.array.drawer_list)
     val topBarTitle = rememberSaveable { mutableStateOf(dr_list[0]) }
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -66,7 +68,7 @@ fun MainScreen(context: Context, darkTheme: Boolean,
                 MainListItemRows(
                     items = mainList.value,
                     modifier = Modifier.padding(innerPadding)
-                ){listItem -> onClick(listItem)}
+                ) { listItem -> onClick(listItem) }
             }
         }
     )

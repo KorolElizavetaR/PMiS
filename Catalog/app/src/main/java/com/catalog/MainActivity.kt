@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                     composable(Routes.INFO_SCREEN.route) {
-                        InfoScreen(item = item.value!!)
+                        InfoScreen(item = item.value!!, navController)
                     }
                 }
             }
