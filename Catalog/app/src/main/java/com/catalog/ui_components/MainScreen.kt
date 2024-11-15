@@ -11,7 +11,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -27,7 +26,7 @@ import kotlinx.coroutines.launch
 fun MainScreen(context: Context, darkTheme: Boolean,
                onThemeToggle: () -> Unit, onClick: (ListItem)->Unit) {
     val dr_list = LocalContext.current.resources.getStringArray(R.array.drawer_list)
-    val topBarTitle = remember { mutableStateOf(dr_list[0]) }
+    val topBarTitle = rememberSaveable { mutableStateOf(dr_list[0]) }
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val mainList = rememberSaveable {
