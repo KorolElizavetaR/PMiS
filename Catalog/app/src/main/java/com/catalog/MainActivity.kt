@@ -12,8 +12,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.catalog.ui.theme.Catalog56Theme
-import com.catalog.utils.MainScreen
+import com.catalog.ui_components.MainScreen
+import com.catalog.utils.ListItem
+import com.catalog.utils.Routes
 
 class MainActivity : ComponentActivity() {
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
@@ -21,29 +26,27 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
+            var item: ListItem? = null
             val isDarkTheme = isSystemInDarkTheme()
             var darkTheme by rememberSaveable { mutableStateOf(isDarkTheme) }
             val context = LocalContext.current
             Catalog56Theme(darkTheme = darkTheme) {
-                MainScreen(context = this, darkTheme = darkTheme,
-                    onThemeToggle = { darkTheme = !darkTheme })
+                NavHost(
+                    navController = navController,
+                    startDestination = Routes.MAIN_SCREEN.route
+                ){
+                    composable(Routes.MAIN_SCREEN.route) {
+                        MainScreen(context = this@MainActivity, darkTheme = darkTheme,
+                            onThemeToggle = { darkTheme = !darkTheme }) { listItem ->
+                            item = listItem
+                            navController.navigate(Routes.INFO_SCREEN.route)
+                        }
+                    }
+                    composable(Routes.INFO_SCREEN.route) {
+                    }
+                }
             }
         }
     }
 }
-
-//@RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
-//private fun getListItemsByIndex(index: Int, context: Context): List<ListItem> {
-//    val list = ArrayList<ListItem>()
-//    val arrayList = context.resources.getStringArray(IdArrayList.listId[index])
-//    arrayList.forEach { item ->
-//        val itemArray = item.split("|")
-//        list.add(
-//            ListItem(
-//                itemArray[0],
-//                itemArray[1]
-//            )
-//        )
-//    }
-//    return list
-//}

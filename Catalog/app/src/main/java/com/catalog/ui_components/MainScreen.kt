@@ -1,4 +1,4 @@
-package com.catalog.utils
+package com.catalog.ui_components
 
 import android.content.Context
 import android.os.Build
@@ -17,15 +17,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.catalog.R
-import com.catalog.ui_components.DrawerMenu
-import com.catalog.ui_components.MainListItemRows
-import com.catalog.ui_components.MainTopBar
+import com.catalog.utils.DrawerEvents
+import com.catalog.utils.IdArrayList
+import com.catalog.utils.ListItem
 import kotlinx.coroutines.launch
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
 @Composable
 fun MainScreen(context: Context, darkTheme: Boolean,
-               onThemeToggle: () -> Unit) {
+               onThemeToggle: () -> Unit, onClick: (ListItem)->Unit) {
     val dr_list = LocalContext.current.resources.getStringArray(R.array.drawer_list)
     val topBarTitle = remember { mutableStateOf(dr_list[0]) }
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -67,7 +67,7 @@ fun MainScreen(context: Context, darkTheme: Boolean,
                 MainListItemRows(
                     items = mainList.value,
                     modifier = Modifier.padding(innerPadding)
-                )
+                ){listItem -> onClick(listItem)}
             }
         }
     )
@@ -82,7 +82,8 @@ private fun getListItemsByIndex(index: Int, context: Context): List<ListItem> {
         list.add(
             ListItem(
                 itemArray[0],
-                itemArray[1]
+                itemArray[1],
+                itemArray[2]
             )
         )
     }

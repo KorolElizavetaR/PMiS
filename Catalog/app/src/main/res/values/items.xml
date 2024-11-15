@@ -14,30 +14,30 @@
     </string-array>
 
     <string-array name="business_lit">
-        <item>Прокачайся! Как применять спортивную психологию в работе и менеджменте|business1.jpg</item>
-        <item>10 фантастических способов добиться успеха|business2.jpg</item>
-        <item>В объятиях PR, или когда клиент готов на всё|business3.jpg</item>
+        <item>Прокачайся! Как применять спортивную психологию в работе и менеджменте|business1.jpg|business1.html</item>
+        <item>10 фантастических способов добиться успеха|business2.jpg|business2.html</item>
+        <item>В объятиях PR, или когда клиент готов на всё|business3.jpg|business3.html</item>
     </string-array>
 
     <string-array name="Kids_lit">
-        <item>Рэпка.Церамок|kid1.jpg</item>
-        <item>Доисторический мир. Опасные ящеры|kid2.jpg</item>
-        <item>Лучшие сказки о животных|kid3.jpg</item>
-        <item>Кря! У пруда|kid4.jpg</item>
-        <item>Дружные зверята|kid5.jpg</item>
+        <item>Рэпка.Церамок|kid1.jpg|dummy.html</item>
+        <item>Доисторический мир. Опасные ящеры|kid2.jpg|kids2.html</item>
+        <item>Лучшие сказки о животных|kid3.jpg|dummy.html</item>
+        <item>Кря! У пруда|kid4.jpg|dummy.html</item>
+        <item>Дружные зверята|kid5.jpg|dummy.html</item>
     </string-array>
 
     <string-array name="Kulture_nd_Art">
-        <item>Образы Италии|art1.jpg</item>
-        <item>Рисуй то, что видишь|art2.jpg</item>
-        <item>Суворов|art3.jpg</item>
-        <item>Золотой век амазонок|art4.jpg</item>
+        <item>Образы Италии|art1.jpg|dummy.html</item>
+        <item>Рисуй то, что видишь|art2.jpg|dummy.html</item>
+        <item>Суворов|art3.jpg|dummy.html</item>
+        <item>Золотой век амазонок|art4.jpg|dummy.html</item>
     </string-array>
 
     <string-array name="fiction">
-        <item>Монашка к завтраку|fiction1.jpg</item>
-        <item>Времетрясение|fiction2.jpg</item>
-        <item>Собор Парижской Богоматери|fiction3.jpg</item>
-        <item>Гений и богиня|fiction4.jpg</item>
+        <item>Монашка к завтраку|fiction1.jpg|dummy.html</item>
+        <item>Времетрясение|fiction2.jpg|dummy.html</item>
+        <item>Собор Парижской Богоматери|fiction3.jpg|dummy.html</item>
+        <item>Гений и богиня|fiction4.jpg|dummy.html</item>
     </string-array>
 </resources>

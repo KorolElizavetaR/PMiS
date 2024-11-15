@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,7 +34,7 @@ import com.catalog.utils.ListItem
  *  Выбирает расположение элементов при обоих ориентациях
  */
 @Composable
-fun MainListItemRows(items: List<ListItem>, modifier: Modifier = Modifier) {
+fun MainListItemRows(items: List<ListItem>, modifier: Modifier = Modifier, onClick: (ListItem)->Unit) {
     val configuration = LocalConfiguration.current
     val columnCount = if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2 else 4
 
@@ -42,10 +43,11 @@ fun MainListItemRows(items: List<ListItem>, modifier: Modifier = Modifier) {
         modifier = modifier // Apply the passed modifier
     ) {
         items(items) { item ->
-            MainListItem(item = item)
+            MainListItem(item = item, onClick = onClick)
         }
     }
 }
+
 /**
  *      Отвечает за отображение элементов пункта в главном меню.
  *
@@ -54,12 +56,15 @@ fun MainListItemRows(items: List<ListItem>, modifier: Modifier = Modifier) {
  *
  */
 @Composable
-fun MainListItem(item: ListItem) {
+fun MainListItem(item: ListItem, onClick: (ListItem) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(300.dp)
-            .padding(5.dp),
+            .padding(5.dp)
+            .clickable {
+                onClick(item)
+            },
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
     ) {
         Box(
