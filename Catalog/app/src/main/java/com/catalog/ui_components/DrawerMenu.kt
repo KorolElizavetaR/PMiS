@@ -68,7 +68,7 @@ fun Header() {
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = "-Кошки (Фелиды)-",
+                text = "ЛИТЕРАТУРА",
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.Green)

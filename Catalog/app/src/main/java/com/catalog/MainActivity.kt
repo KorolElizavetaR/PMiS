@@ -7,8 +7,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresExtension
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
@@ -32,7 +32,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Catalog56Theme {
-                val topBarTitle = remember { mutableStateOf("Азиатские кошки") }
+                val dr_list = resources.getStringArray(R.array.drawer_list)
+                val topBarTitle = remember { mutableStateOf(dr_list.get(0)) }
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
                 val mainList = rememberSaveable {
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                 ModalNavigationDrawer(
                     drawerState = drawerState,
                     drawerContent = {
-                        Column {
+                        ModalDrawerSheet() {
                             DrawerMenu() { event ->
                                 when (event) {
                                     is DrawerEvents.OnItemClick -> {
