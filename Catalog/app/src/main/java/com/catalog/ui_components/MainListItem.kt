@@ -14,11 +14,11 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -60,7 +60,7 @@ fun MainListItem(item: ListItem) {
             .fillMaxWidth()
             .height(300.dp)
             .padding(5.dp),
-        border = BorderStroke(1.dp, Color.Red)
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -75,12 +75,12 @@ fun MainListItem(item: ListItem) {
                 text = item.title,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.Red)
+                    .background(MaterialTheme.colorScheme.primary)
                     .padding(10.dp),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = Color.White
+                color = MaterialTheme.colorScheme.background
             )
         }
     }

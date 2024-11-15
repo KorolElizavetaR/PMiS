@@ -15,11 +15,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -53,10 +53,10 @@ fun Header() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+        //    .background(MaterialTheme.colorScheme.primary)
             .height(170.dp)
             .padding(5.dp),
-//        shape = RoundedCornerShape(10.dp),
-        border = BorderStroke(1.dp, customGreen)
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -72,12 +72,12 @@ fun Header() {
                 text = "ЛИТЕРАТУРА",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(customGreen)
+                    .background(MaterialTheme.colorScheme.primary)
                     .padding(10.dp),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = Color.White
+                color = MaterialTheme.colorScheme.background
             )
         }
     }
@@ -92,7 +92,7 @@ fun Body(onEvent: (DrawerEvents) -> Unit) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(3.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background)
             ) {
                 Text(
                     text = title,

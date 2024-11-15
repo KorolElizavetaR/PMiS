@@ -17,7 +17,10 @@ import kotlinx.coroutines.launch
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun MainTopBar(title: String, drawerState: DrawerState) {
+fun MainTopBar(
+    title: String, drawerState: DrawerState, isDarkTheme: Boolean,
+    onThemeToggle: () -> Unit
+) {
     val coroutine = rememberCoroutineScope()
     TopAppBar(
         title = {
@@ -46,7 +49,7 @@ fun MainTopBar(title: String, drawerState: DrawerState) {
                 )
             }
             IconButton(
-                onClick = { }
+                onClick = onThemeToggle
             ) {
                 Icon(
                     imageVector = Icons.Default.AddCircle,
