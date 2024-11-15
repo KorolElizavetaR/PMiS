@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="drawer_list">
+        <item>Бизнес литература</item>
+        <item>Детская литература</item>
+        <item>Культура и искусство</item>
+        <item>Художественная литература</item>
+<!--        <item>Учебная литература</item>-->
+<!--        <item>Белорусская литература</item>-->
+<!--        <item>Домашний мир</item>-->
+<!--        <item>Литература на иностранных языках</item>-->
+<!--        <item>Религия и мистика</item>-->
+<!--        <item>Научная и специальная литература</item>-->
+    </string-array>
+
+    <string-array name="business_lit">
+        <item>Прокачайся! Как применять спортивную психологию в работе и менеджменте|business1.jpg</item>
+        <item>10 фантастических способов добиться успеха|business2.jpg</item>
+        <item>В объятиях PR, или когда клиент готов на всё|business3.jpg</item>
+    </string-array>
+
+    <string-array name="Kids_lit">
+        <item>Рэпка.Церамок|kid1.jpg</item>
+        <item>Доисторический мир. Опасные ящеры|kid2.jpg</item>
+        <item>Лучшие сказки о животных|kid3.jpg</item>
+        <item>Кря! У пруда|kid4.jpg</item>
+        <item>Дружные зверята|kid5.jpg</item>
+    </string-array>
+
+    <string-array name="Kulture_nd_Art">
+        <item>Образы Италии|art1.jpg</item>
+        <item>Рисуй то, что видишь|art2.jpg</item>
+        <item>Суворов|art3.jpg</item>
+        <item>Золотой век амазонок|art4.jpg</item>
+    </string-array>
+
+    <string-array name="fiction">
+        <item>Монашка к завтраку|fiction1.jpg</item>
+        <item>Времетрясение|fiction2.jpg</item>
+        <item>Собор Парижской Богоматери|fiction3.jpg</item>
+        <item>Гений и богиня|fiction4.jpg</item>
+    </string-array>
+</resources>
