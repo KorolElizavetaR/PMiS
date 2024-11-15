@@ -33,13 +33,13 @@ import com.catalog.utils.ListItem
  *  Выбирает расположение элементов при обоих ориентациях
  */
 @Composable
-fun MainListItemRows(items: List<ListItem>) {
+fun MainListItemRows(items: List<ListItem>, modifier: Modifier = Modifier) {
     val configuration = LocalConfiguration.current
     val columnCount = if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2 else 4
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(columnCount),
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier // Apply the passed modifier
     ) {
         items(items) { item ->
             MainListItem(item = item)

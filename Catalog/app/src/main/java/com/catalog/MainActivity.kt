@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresExtension
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -16,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
 import com.catalog.ui.theme.Catalog56Theme
 import com.catalog.ui_components.DrawerMenu
 import com.catalog.ui_components.MainListItemRows
@@ -62,12 +64,13 @@ class MainActivity : ComponentActivity() {
                         Scaffold(
                             topBar = {
                                 MainTopBar(
-                                    title = topBarTitle.value, drawerState
-                                    = drawerState
+                                    title = topBarTitle.value,
+                                    drawerState = drawerState
                                 )
                             }
                         ) { innerPadding ->
-                            MainListItemRows(items = mainList.value)
+                            // Pass innerPadding to LazyVerticalGrid to ensure space between top bar and grid
+                            MainListItemRows(items = mainList.value, modifier = Modifier.padding(innerPadding))
                         }
                     }
                 )

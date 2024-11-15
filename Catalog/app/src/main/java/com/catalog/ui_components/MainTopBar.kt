@@ -1,6 +1,7 @@
 package com.catalog.ui_components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DrawerState
@@ -42,6 +43,14 @@ fun MainTopBar(title: String, drawerState: DrawerState) {
                 Icon(
                     imageVector = Icons.Default.Favorite,
                     contentDescription = "Favorite"
+                )
+            }
+            IconButton(
+                onClick = { }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.AddCircle,
+                    contentDescription = "ChangeTheme"
                 )
             }
         }

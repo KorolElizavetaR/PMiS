@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -22,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,15 +31,12 @@ import androidx.compose.ui.unit.sp
 import com.catalog.R
 import com.catalog.utils.DrawerEvents
 
+/**
+ *      Выдвижное меню. Сначала идет Header, потом Body.
+ */
 @Composable
 fun DrawerMenu(onEvent: (DrawerEvents) -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
-//        Image(
-//            painter = painterResource(id = R.drawable.backimage),
-//            contentDescription = "Main Bg Image",
-//            modifier = Modifier.fillMaxSize(),
-//            contentScale = ContentScale.Crop
-//        )
         Column(modifier = Modifier.fillMaxSize()) {
             Header()
             Body() {event->onEvent(event)}
@@ -49,13 +46,17 @@ fun DrawerMenu(onEvent: (DrawerEvents) -> Unit) {
 
 @Composable
 fun Header() {
+    val customGreen = colorResource(id = R.color.CUSTOM_GREEN_LIGHT_THEME)
+    /**
+     *  контейнер, куда можно поместить один составной элемент
+     */
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(170.dp)
             .padding(5.dp),
-        shape = RoundedCornerShape(10.dp),
-        border = BorderStroke(1.dp, Color.Green)
+//        shape = RoundedCornerShape(10.dp),
+        border = BorderStroke(1.dp, customGreen)
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -71,7 +72,7 @@ fun Header() {
                 text = "ЛИТЕРАТУРА",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.Green)
+                    .background(customGreen)
                     .padding(10.dp),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
