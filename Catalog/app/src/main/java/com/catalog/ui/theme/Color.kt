@@ -10,5 +10,5 @@ import androidx.compose.ui.graphics.Color
 //val PurpleGrey40 = Color(0xFF625b71)
 //val Pink40 = Color(0xFF7D5260)
 
-val Green_lightTheme = Color(0x91bdab);
-val Green_darkTheme = Color(0x12402d);
+val Green_lightTheme = Color(0xff91bdab);
+val Green_darkTheme = Color(0xff12402d);

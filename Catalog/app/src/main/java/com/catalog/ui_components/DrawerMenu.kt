@@ -1,5 +1,6 @@
 package com.catalog.ui_components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,8 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.text.font.FontWeight
@@ -39,24 +41,28 @@ fun DrawerMenu(onEvent: (DrawerEvents) -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
             Header()
-            Body() {event->onEvent(event)}
+            Body() { event -> onEvent(event) }
         }
     }
 }
 
 @Composable
 fun Header() {
-    val customGreen = colorResource(id = R.color.CUSTOM_GREEN_LIGHT_THEME)
+    val configuration = LocalConfiguration.current
+    val isPortrait = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val size = if (isPortrait) 40.dp else 170.dp
     /**
      *  контейнер, куда можно поместить один составной элемент
      */
     Card(
         modifier = Modifier
             .fillMaxWidth()
-        //    .background(MaterialTheme.colorScheme.primary)
-            .height(170.dp)
-            .padding(5.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)
+            //    .background(MaterialTheme.colorScheme.primary)
+            .height(size)
+        //   .padding(5.dp)
+        ,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+        shape = RectangleShape
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -99,12 +105,12 @@ fun Body(onEvent: (DrawerEvents) -> Unit) {
                     modifier = Modifier
                         .fillMaxSize()
                         .clickable {
-                            onEvent(DrawerEvents.OnItemClick(title,index))
-                        } .
-                        padding(10.dp)
+                            onEvent(DrawerEvents.OnItemClick(title, index))
+                        }
+                        .padding(10.dp)
                         .wrapContentWidth(),
                     fontWeight = FontWeight.Bold,
-                    fontSize=16.sp
+                    fontSize = 16.sp
                 )
             }
         }

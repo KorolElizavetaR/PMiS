@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import com.catalog.R
 import com.catalog.utils.DrawerEvents
@@ -38,7 +39,7 @@ fun MainScreen(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet() {
+            ModalDrawerSheet(drawerShape = RectangleShape) {
                 DrawerMenu() { event ->
                     when (event) {
                         is DrawerEvents.OnItemClick -> {
@@ -67,7 +68,7 @@ fun MainScreen(
             ) { innerPadding ->
                 MainListItemRows(
                     items = mainList.value,
-                    modifier = Modifier.padding(innerPadding)
+                    modifier = Modifier.padding(innerPadding),
                 ) { listItem -> onClick(listItem) }
             }
         }

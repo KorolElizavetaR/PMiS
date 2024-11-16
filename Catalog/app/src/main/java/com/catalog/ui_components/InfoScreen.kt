@@ -15,12 +15,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.catalog.utils.ListItem
-import com.catalog.utils.Routes
 
 @Composable
 fun InfoScreen(item: ListItem, navController: NavController) {
@@ -29,7 +29,7 @@ fun InfoScreen(item: ListItem, navController: NavController) {
             .fillMaxSize()
             //  .padding(5.dp)
             .background(color = MaterialTheme.colorScheme.background),
-       // shape = RoundedCornerShape(10.dp),
+         shape = RectangleShape
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
@@ -41,7 +41,8 @@ fun InfoScreen(item: ListItem, navController: NavController) {
                 horizontalArrangement = Arrangement.Start
             ) {
                 Button(
-                    onClick = { navController.navigate(route = Routes.MAIN_SCREEN.route) }
+                    // onClick = { navController.navigate(route = Routes.MAIN_SCREEN.route) }
+                    onClick = { navController.popBackStack() }
                 ) {
                     Text(text = "Back")
                 }

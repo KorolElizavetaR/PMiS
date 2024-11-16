@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -34,13 +35,17 @@ import com.catalog.utils.ListItem
  *  Выбирает расположение элементов при обоих ориентациях
  */
 @Composable
-fun MainListItemRows(items: List<ListItem>, modifier: Modifier = Modifier, onClick: (ListItem)->Unit) {
+fun MainListItemRows(
+    items: List<ListItem>,
+    modifier: Modifier = Modifier,
+    onClick: (ListItem) -> Unit,
+) {
     val configuration = LocalConfiguration.current
     val columnCount = if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 2 else 4
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(columnCount),
-        modifier = modifier // Apply the passed modifier
+        modifier = modifier
     ) {
         items(items) { item ->
             MainListItem(item = item, onClick = onClick)
@@ -52,7 +57,7 @@ fun MainListItemRows(items: List<ListItem>, modifier: Modifier = Modifier, onCli
  *      Отвечает за отображение элементов пункта в главном меню.
  *
  *      При вертикальном отображении располагает книги в два ряда
- *      При горизонтальном отображении располагает книги в n (?) рядов
+ *      При горизонтальном отображении располагает книги в 4 рядf
  *
  */
 @Composable
@@ -66,6 +71,7 @@ fun MainListItem(item: ListItem, onClick: (ListItem) -> Unit) {
                 onClick(item)
             },
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+        shape = RectangleShape
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),

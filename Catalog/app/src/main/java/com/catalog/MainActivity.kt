@@ -29,7 +29,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            var item = rememberSaveable(stateSaver = ItemSaver) { mutableStateOf(ListItem("", "",""))}
+            var item =
+                rememberSaveable(stateSaver = ItemSaver) { mutableStateOf(ListItem("", "", "")) }
             val isDarkTheme = isSystemInDarkTheme()
             var darkTheme by rememberSaveable { mutableStateOf(isDarkTheme) }
             val context = LocalContext.current
@@ -37,11 +38,12 @@ class MainActivity : ComponentActivity() {
                 NavHost(
                     navController = navController,
                     startDestination = Routes.MAIN_SCREEN.route
-                ){
+                ) {
                     composable(Routes.MAIN_SCREEN.route) {
-                        MainScreen(context = this@MainActivity, darkTheme = darkTheme,
+                        MainScreen(context = context, darkTheme = darkTheme,
                             onThemeToggle = { darkTheme = !darkTheme }) { listItem ->
-                            item.value =ListItem(listItem.title,listItem.imageName,listItem.htmlName)
+                            item.value =
+                                ListItem(listItem.title, listItem.imageName, listItem.htmlName)
                             navController.navigate(Routes.INFO_SCREEN.route)
                         }
                     }
