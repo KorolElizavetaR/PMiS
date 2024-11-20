@@ -1,6 +1,7 @@
 package com.catalog.ui.theme
 
 import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -10,23 +11,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    background = Color.Black,
-    primary = Green_darkTheme,
-    secondary = Color.White, // text color
-    tertiary = Color.White
+private val LightColorScheme = lightColorScheme(
+    primary = Color(0xFFBD4646),
+    onPrimary = Color.White,
+    secondary = Color(0xFF70061D),
+    onSecondary = Color.Black,
+    background = Color(0xFFFFFFFF),
+    onBackground = Color.Black,
+    surface = Color.White,
+    onSurface = Color.Black,
 )
 
-private val LightColorScheme = lightColorScheme(
-    background = Color.White,
-    primary = Green_lightTheme,
-    secondary = Color.Black,
-    tertiary = Color.Black
+private val DarkColorScheme = darkColorScheme(
+    primary = Color(0xFF5D2323),
+    onPrimary = Color.Black,
+    secondary = Color(0xFFB05F70),
+    onSecondary = Color.Black,
+    background = Color(0xFF332323),
+    onBackground = Color.White,
+    surface = Color(0xFF725050),
+    onSurface = Color.White,
 )
 
 @Composable
 fun Catalog56Theme(
-    darkTheme: Boolean,
+    darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {

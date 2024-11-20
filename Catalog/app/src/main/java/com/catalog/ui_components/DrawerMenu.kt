@@ -57,10 +57,8 @@ fun Header() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            //    .background(MaterialTheme.colorScheme.primary)
-            .height(size)
-        //   .padding(5.dp)
-        ,
+            .background(MaterialTheme.colorScheme.primary)
+            .height(size),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
         shape = RectangleShape
     ) {
@@ -83,7 +81,7 @@ fun Header() {
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.secondary
             )
         }
     }
@@ -98,7 +96,7 @@ fun Body(onEvent: (DrawerEvents) -> Unit) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(3.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Text(
                     text = title,
@@ -110,7 +108,8 @@ fun Body(onEvent: (DrawerEvents) -> Unit) {
                         .padding(10.dp)
                         .wrapContentWidth(),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colorScheme.secondary
                 )
             }
         }

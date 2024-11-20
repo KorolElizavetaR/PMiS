@@ -6,11 +6,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresExtension
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,17 +28,14 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             var item =
                 rememberSaveable(stateSaver = ItemSaver) { mutableStateOf(ListItem("", "", "")) }
-            val isDarkTheme = isSystemInDarkTheme()
-            var darkTheme by rememberSaveable { mutableStateOf(isDarkTheme) }
             val context = LocalContext.current
-            Catalog56Theme(darkTheme = darkTheme) {
+            Catalog56Theme() {
                 NavHost(
                     navController = navController,
                     startDestination = Routes.MAIN_SCREEN.route
                 ) {
                     composable(Routes.MAIN_SCREEN.route) {
-                        MainScreen(context = context, darkTheme = darkTheme,
-                            onThemeToggle = { darkTheme = !darkTheme }) { listItem ->
+                        MainScreen(context = context) { listItem ->
                             item.value =
                                 ListItem(listItem.title, listItem.imageName, listItem.htmlName)
                             navController.navigate(Routes.INFO_SCREEN.route)

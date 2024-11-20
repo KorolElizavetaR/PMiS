@@ -90,8 +90,7 @@ fun MainListItem(item: ListItem, onClick: (ListItem) -> Unit) {
                     .padding(10.dp),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.background
+                fontSize = 20.sp
             )
         }
     }

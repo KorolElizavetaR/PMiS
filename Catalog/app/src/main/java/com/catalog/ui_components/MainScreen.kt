@@ -25,8 +25,7 @@ import kotlinx.coroutines.launch
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
 @Composable
 fun MainScreen(
-    context: Context, darkTheme: Boolean,
-    onThemeToggle: () -> Unit, onClick: (ListItem) -> Unit
+    context: Context, onClick: (ListItem) -> Unit
 ) {
     val dr_list = LocalContext.current.resources.getStringArray(R.array.drawer_list)
     val topBarTitle = rememberSaveable { mutableStateOf(dr_list[0]) }
@@ -60,9 +59,7 @@ fun MainScreen(
                 topBar = {
                     MainTopBar(
                         title = topBarTitle.value,
-                        drawerState = drawerState,
-                        isDarkTheme = darkTheme,
-                        onThemeToggle = onThemeToggle
+                        drawerState = drawerState
                     )
                 }
             ) { innerPadding ->

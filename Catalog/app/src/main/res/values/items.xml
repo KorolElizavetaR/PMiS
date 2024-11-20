@@ -5,11 +5,10 @@
         <item>Детская литература</item>
         <item>Культура и искусство</item>
         <item>Художественная литература</item>
-<!--        <item>Учебная литература</item>-->
-<!--        <item>Белорусская литература</item>-->
-<!--        <item>Домашний мир</item>-->
-<!--        <item>Литература на иностранных языках</item>-->
-<!--        <item>Религия и мистика</item>-->
+        <item>Учебная литература</item>
+        <item>Домашний мир</item>
+        <item>Литература на иностранных языках</item>
+        <item>Религия и мистика</item>
 <!--        <item>Научная и специальная литература</item>-->
     </string-array>
 
@@ -20,24 +19,51 @@
     </string-array>
 
     <string-array name="Kids_lit">
-        <item>Рэпка.Церамок|kid1.jpg|dummy.html</item>
+        <item>Рэпка.Церамок|kid1.jpg|kids1.html</item>
         <item>Доисторический мир. Опасные ящеры|kid2.jpg|kids2.html</item>
-        <item>Лучшие сказки о животных|kid3.jpg|dummy.html</item>
-        <item>Кря! У пруда|kid4.jpg|dummy.html</item>
-        <item>Дружные зверята|kid5.jpg|dummy.html</item>
+        <item>Лучшие сказки о животных|kid3.jpg|kids3.html</item>
+        <item>Кря! У пруда|kid4.jpg|kids4.html</item>
+        <item>Дружные зверята|kid5.jpg|kids5.html</item>
     </string-array>
 
     <string-array name="Kulture_nd_Art">
-        <item>Образы Италии|art1.jpg|dummy.html</item>
-        <item>Рисуй то, что видишь|art2.jpg|dummy.html</item>
-        <item>Суворов|art3.jpg|dummy.html</item>
-        <item>Золотой век амазонок|art4.jpg|dummy.html</item>
+        <item>Образы Италии|art1.jpg|art1.html</item>
+        <item>Рисуй то, что видишь|art2.jpg|art2.html</item>
+        <item>Суворов|art3.jpg|art3.html</item>
+        <item>Золотой век амазонок|art4.jpg|art4.html</item>
     </string-array>
 
     <string-array name="fiction">
-        <item>Монашка к завтраку|fiction1.jpg|dummy.html</item>
-        <item>Времетрясение|fiction2.jpg|dummy.html</item>
-        <item>Собор Парижской Богоматери|fiction3.jpg|dummy.html</item>
-        <item>Гений и богиня|fiction4.jpg|dummy.html</item>
+        <item>Монашка к завтраку|fiction1.jpg|fiction1.html</item>
+        <item>Времетрясение|fiction2.jpg|fiction2.html</item>
+        <item>Собор Парижской Богоматери|fiction3.jpg|fiction3.html</item>
+        <item>Гений и богиня|fiction4.jpg|fiction4.html</item>
+    </string-array>
+
+    <string-array name="study">
+        <item>Матэматыка : вучэбны дапаможнік для 2-га класа|study1.jpg|study1.html</item>
+        <item>Фізічная геаграфія|study2.jpg|study2.html</item>
+        <item>Біялогія. 9 клас|study3.jpg|study3.html</item>
+        <item>Фізіка. 9 клас|study4.jpg|study4.html</item>
+        <item>Гісторыя Старажытнага свету.|study5.jpg|study5.html</item>
+    </string-array>
+
+    <string-array name="home_lit">
+        <item>Кашпо. Стильные украшения для интерьера|home1.jpg|home1.html</item>
+        <item>Войлок.Самые красивые и модные украшения|home2.jpg|home2.html</item>
+        <item>Секреты вышивки в ботаническом стиле|home3.jpg|home3.html</item>
+    </string-array>
+
+    <string-array name="foreign_lit">
+        <item>Русско-таджикский, таджикско-русский разговорник|foreign1.jpg|foreign1.html</item>
+        <item>Английский для детей. Всё самое лучшее в одной книге|foreign2.jpg|foreign2.html</item>
+        <item>Практический курс разговорного греческого языка|foreign3.jpg|foreign3.html</item>
+        <item>Разговорный греческий в диалогах (+ CD)|foreign4.jpg|foreign4.html</item>
+    </string-array>
+
+    <string-array name="magic">
+        <item>Эффективный самомассаж от недугов и заболеваний|magic1.jpg|magic1.html</item>
+        <item>Даосские секреты любовного искусства|magic2.jpg|magic2.html</item>
+        <item>Учитесь у великих|magic3.jpg|magic3.html</item>
     </string-array>
 </resources>
