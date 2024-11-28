@@ -16,16 +16,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
+import com.catalog.MainViewModel
 import com.catalog.R
 import com.catalog.utils.DrawerEvents
 import com.catalog.utils.IdArrayList
 import com.catalog.utils.ListItem
 import kotlinx.coroutines.launch
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
 @Composable
 fun MainScreen(
-    context: Context, onClick: (ListItem) -> Unit
+    mainViewModel: MainViewModel = hiltViewModel(), onClick: (ListItem) -> Unit
 ) {
     val dr_list = LocalContext.current.resources.getStringArray(R.array.drawer_list)
     val topBarTitle = rememberSaveable { mutableStateOf(dr_list[0]) }
