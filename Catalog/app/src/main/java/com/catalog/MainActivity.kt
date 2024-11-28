@@ -18,7 +18,9 @@ import com.catalog.ui_components.MainScreen
 import com.catalog.utils.ItemSaver
 import com.catalog.utils.ListItem
 import com.catalog.utils.Routes
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
