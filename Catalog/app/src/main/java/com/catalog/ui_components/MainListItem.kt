@@ -2,7 +2,6 @@ package com.catalog.ui_components
 
 import android.content.res.Configuration
 import android.graphics.BitmapFactory
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,6 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -72,7 +72,12 @@ fun MainListItemRows(
  *
  */
 @Composable
-fun MainListItem(mainViewModel: MainViewModel = hiltViewModel(), item: ListItem, onClick: (ListItem) -> Unit) {
+fun MainListItem(
+    mainViewModel: MainViewModel = hiltViewModel(),
+    item: ListItem,
+    onClick: (ListItem) -> Unit
+) {
+   // val backgroundColor = if (isSystemInDarkTheme()) Color(MaterialTheme.colorScheme.background) else Color.White
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -82,12 +87,15 @@ fun MainListItem(mainViewModel: MainViewModel = hiltViewModel(), item: ListItem,
                 onClick(item)
             },
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
-        shape = RectangleShape
+        shape = RectangleShape,
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.BottomCenter
-        ) {}
+        ) {
+        }
+
         ConstraintLayout(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -109,7 +117,7 @@ fun MainListItem(mainViewModel: MainViewModel = hiltViewModel(), item: ListItem,
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(MaterialTheme.colorScheme.primary)
-                    .padding(10.dp)
+                    .padding(5.dp)
                     .constrainAs(text) {
                         bottom.linkTo(parent.bottom)
                         start.linkTo(parent.start)
@@ -117,7 +125,8 @@ fun MainListItem(mainViewModel: MainViewModel = hiltViewModel(), item: ListItem,
                     },
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                color = MaterialTheme.colorScheme.onPrimary
             )
             IconButton(onClick = {
                 mainViewModel.insertItem(item.copy(isfav = !item.isfav))
@@ -140,6 +149,75 @@ fun MainListItem(mainViewModel: MainViewModel = hiltViewModel(), item: ListItem,
         }
     }
 }
+//@Composable
+//fun MainListItem(mainViewModel: MainViewModel = hiltViewModel(), item: ListItem, onClick: (ListItem) -> Unit) {
+//    Card(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .height(300.dp)
+//            .padding(5.dp)
+//            .clickable {
+//                onClick(item)
+//            },
+//        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+//        shape = RectangleShape
+//    ) {
+//        Box(
+//            modifier = Modifier.fillMaxSize(),
+//            contentAlignment = Alignment.BottomCenter
+//        ) {}
+//        ConstraintLayout(
+//            modifier = Modifier.fillMaxSize()
+//        ) {
+//            val (image, text, fav) = createRefs()
+//            AssetImage(
+//                imageName = item.imageName,
+//                contentDescription = item.title,
+//                modifier = Modifier
+//                    .fillMaxSize()
+//                    .constrainAs(image) {
+//                        top.linkTo(parent.top)
+//                        start.linkTo(parent.start)
+//                        end.linkTo(parent.end)
+//                        bottom.linkTo(parent.bottom)
+//                    }
+//            )
+//            Text(
+//                text = item.title,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .background(MaterialTheme.colorScheme.primary)
+//                    .padding(10.dp)
+//                    .constrainAs(text) {
+//                        bottom.linkTo(parent.bottom)
+//                        start.linkTo(parent.start)
+//                        end.linkTo(parent.end)
+//                    },
+//                textAlign = TextAlign.Center,
+//                fontWeight = FontWeight.Bold,
+//                fontSize = 20.sp
+//            )
+//            IconButton(onClick = {
+//                mainViewModel.insertItem(item.copy(isfav = !item.isfav))
+//            },
+//                modifier = Modifier.constrainAs(fav) {
+//                    top.linkTo(parent.top)
+//                    end.linkTo(parent.end)
+//                })
+//            {
+//                Icon(
+//                    imageVector = Icons.Default.Favorite,
+//                    contentDescription = "Favorite",
+//                    tint = if (item.isfav) MaterialTheme.colorScheme.primary else Gray,
+//                    modifier = Modifier
+//                        .clip(CircleShape)
+//                        .background(MaterialTheme.colorScheme.tertiary)
+//                        .padding(5.dp)
+//                )
+//            }
+//        }
+//    }
+//}
 
 /**
  *      Получаем картинки из папки Assets.
@@ -152,9 +230,6 @@ fun AssetImage(
     val assetManager = context.assets
     val inputStream = assetManager.open(imageName)
     val bitMap = BitmapFactory.decodeStream(inputStream)
-    if (bitMap == null) {
-        Log.e("AssetImage", "Failed to decode bitmap for: $imageName")
-    }
     Image(
         bitmap = bitMap.asImageBitmap(),
 
