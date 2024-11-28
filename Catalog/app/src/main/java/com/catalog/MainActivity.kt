@@ -8,7 +8,6 @@ import androidx.activity.compose.setContent
 import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,19 +26,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            var item= rememberSaveable(stateSaver = ItemSaver) {
+                mutableStateOf( ListItem(id = 0, title = "", imageName = "",
+                    htmlName = "", isfav = false, category = ""))
+            }
             val navController = rememberNavController()
-            var item =
-                rememberSaveable(stateSaver = ItemSaver) { mutableStateOf(ListItem("", "", "")) }
-            val context = LocalContext.current
             Catalog56Theme() {
                 NavHost(
                     navController = navController,
                     startDestination = Routes.MAIN_SCREEN.route
                 ) {
                     composable(Routes.MAIN_SCREEN.route) {
-                        MainScreen(context = context) { listItem ->
-                            item.value =
-                                ListItem(listItem.title, listItem.imageName, listItem.htmlName)
+                        MainScreen() { listItem ->item.value =ListItem(listItem.id,
+                            listItem.title,
+                            listItem.imageName,
+                            listItem.htmlName,
+                            listItem.isfav,
+                            listItem.category)
                             navController.navigate(Routes.INFO_SCREEN.route)
                         }
                     }

@@ -9,7 +9,7 @@
         <item>Домашний мир</item>
         <item>Литература на иностранных языках</item>
         <item>Религия и мистика</item>
-<!--        <item>Научная и специальная литература</item>-->
+        <item>Научная и специальная литература</item>
     </string-array>
 
     <string-array name="business_lit">

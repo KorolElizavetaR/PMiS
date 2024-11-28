@@ -1,6 +1,6 @@
 package com.catalog.ui_components
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresExtension
 import androidx.compose.foundation.layout.padding
@@ -10,31 +10,31 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.catalog.MainViewModel
-import com.catalog.R
 import com.catalog.utils.DrawerEvents
-import com.catalog.utils.IdArrayList
 import com.catalog.utils.ListItem
 import kotlinx.coroutines.launch
-import androidx.hilt.navigation.compose.hiltViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
 @Composable
 fun MainScreen(
     mainViewModel: MainViewModel = hiltViewModel(), onClick: (ListItem) -> Unit
 ) {
-    val dr_list = LocalContext.current.resources.getStringArray(R.array.drawer_list)
-    val topBarTitle = rememberSaveable { mutableStateOf(dr_list[0]) }
+    val topBarTitle = rememberSaveable { mutableStateOf("Бизнес Литература") }
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val mainList = rememberSaveable {
-        mutableStateOf(getListItemsByIndex(0, context))
+    val mainlist = mainViewModel.mainList
+
+    LaunchedEffect(Unit) {
+        mainViewModel.getAllItemsByCategory(topBarTitle.value)
     }
 
     ModalNavigationDrawer(
@@ -45,9 +45,7 @@ fun MainScreen(
                     when (event) {
                         is DrawerEvents.OnItemClick -> {
                             topBarTitle.value = event.title
-                            mainList.value = getListItemsByIndex(
-                                event.index, context
-                            )
+                            mainViewModel.getAllItemsByCategory(event.title)
                         }
                     }
                     scope.launch {
@@ -59,34 +57,17 @@ fun MainScreen(
         content = {
             Scaffold(
                 topBar = {
-                    MainTopBar(
-                        title = topBarTitle.value,
-                        drawerState = drawerState
-                    )
+                    MainTopBar(title = topBarTitle.value, drawerState = drawerState){
+                        topBarTitle.value = "Избранные"
+                        mainViewModel.getFavorites()
+                    }
                 }
             ) { innerPadding ->
                 MainListItemRows(
-                    items = mainList.value,
+                    items = mainlist.value,
                     modifier = Modifier.padding(innerPadding),
                 ) { listItem -> onClick(listItem) }
             }
         }
     )
-}
-
-@RequiresExtension(extension = Build.VERSION_CODES.S, version = 13)
-private fun getListItemsByIndex(index: Int, context: Context): List<ListItem> {
-    val list = ArrayList<ListItem>()
-    val arrayList = context.resources.getStringArray(IdArrayList.listId[index])
-    arrayList.forEach { item ->
-        val itemArray = item.split("|")
-        list.add(
-            ListItem(
-                itemArray[0],
-                itemArray[1],
-                itemArray[2]
-            )
-        )
-    }
-    return list
 }
