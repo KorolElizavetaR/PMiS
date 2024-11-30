@@ -35,6 +35,7 @@ fun MainScreen(
 
     LaunchedEffect(Unit) {
         mainViewModel.getAllItemsByCategory(topBarTitle.value)
+        // mainViewModel.getFavorites()
     }
 
     ModalNavigationDrawer(

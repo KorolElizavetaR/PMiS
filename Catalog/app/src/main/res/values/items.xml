@@ -9,7 +9,7 @@
         <item>Домашний мир</item>
         <item>Литература на иностранных языках</item>
         <item>Религия и мистика</item>
-        <item>Научная и специальная литература</item>
+<!--        <item>Научная литература</item>-->
     </string-array>
 
     <string-array name="business_lit">
@@ -65,5 +65,11 @@
         <item>Эффективный самомассаж от недугов и заболеваний|magic1.jpg|magic1.html</item>
         <item>Даосские секреты любовного искусства|magic2.jpg|magic2.html</item>
         <item>Учитесь у великих|magic3.jpg|magic3.html</item>
+    </string-array>
+
+    <string-array name="sciense">
+        <item>Большая энциклопедия динозавр|sciense1.jpg|sciense1.html</item>
+        <item>Структурно-фазовые превращения в быстрозакаленных алюминиевых сплавах|sciense2.jpg|sciense2.html</item>
+        <item>Химия. Учебник для колледжей.|sciense3.jpg|sciense3.html</item>
     </string-array>
 </resources>
