@@ -43,33 +43,55 @@ fun InfoScreen(item: ListItem) {
             Row(
                 modifier = Modifier.fillMaxSize()
             ) {
-                AssetImage(
+                ContentSection(
                     imageName = item.imageName,
-                    contentDescription = item.title,
-                    modifier = Modifier
-                        .fillMaxHeight()
+                    title = item.title,
+                    htmlName = item.htmlName,
+                    isLandscape = true
                 )
-                HtmlLoader(htmlName = item.htmlName)
             }
         } else {
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                AssetImage(
+                ContentSection(
                     imageName = item.imageName,
-                    contentDescription = item.title,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp)
-                        .padding(bottom = 8.dp)
-                )
-                HtmlLoader(
-                    htmlName = item.htmlName
+                    title = item.title,
+                    htmlName = item.htmlName,
+                    isLandscape = false
                 )
             }
         }
     }
 }
+
+@Composable
+fun ContentSection(
+    imageName: String,
+    title: String,
+    htmlName: String,
+    isLandscape: Boolean
+) {
+    if (isLandscape) {
+        AssetImage(
+            imageName = imageName,
+            contentDescription = title,
+            modifier = Modifier
+                .fillMaxHeight()
+        )
+    } else {
+        AssetImage(
+            imageName = imageName,
+            contentDescription = title,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp)
+                .padding(bottom = 8.dp)
+        )
+    }
+    HtmlLoader(htmlName = htmlName)
+}
+
 
 //@Composable
 //fun InfoScreen(item: ListItem) {
