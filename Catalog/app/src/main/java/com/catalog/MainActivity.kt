@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //clearDatabase(this)
         setContent {
             var item= rememberSaveable(stateSaver = ItemSaver) {
                 mutableStateOf( ListItem(id = 0, title = "", imageName = "",
@@ -54,3 +55,35 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+//fun clearDatabase(context: Context) {
+//    val dbPath = context.getDatabasePath("info.db")
+//    if (dbPath.exists()) {
+//        if (dbPath.delete()) {
+//            Log.d("DB_CLEAR", "База данных успешно удалена.")
+//        } else {
+//            Log.e("DB_CLEAR", "Не удалось удалить базу данных.")
+//        }
+//    } else {
+//        Log.d("DB_CLEAR", "База данных не найдена.")
+//    }
+//}
+//
+//
+//fun clearAllDatabases(context: Context) {
+//    val dbDir = context.getDatabasePath("info.db").parentFile
+//    if (dbDir != null && dbDir.exists()) {
+//        dbDir.deleteRecursively()
+//        Log.d("DB_CLEAR", "Все базы данных удалены.")
+//    } else {
+//        Log.d("DB_CLEAR", "Папка базы данных не найдена.")
+//    }
+//}fun clearAppData(context: Context) {
+//    try {
+//        val runtime = Runtime.getRuntime()
+//        runtime.exec("pm clear ${context.packageName}")
+//        Log.d("APP_CLEAR", "Данные приложения очищены.")
+//    } catch (e: Exception) {
+//        e.printStackTrace()
+//    }
+//}

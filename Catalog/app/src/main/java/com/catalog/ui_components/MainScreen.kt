@@ -33,9 +33,12 @@ fun MainScreen(
     val scope = rememberCoroutineScope()
     val mainlist = mainViewModel.mainList
 
-    LaunchedEffect(Unit) {
-        mainViewModel.getAllItemsByCategory(topBarTitle.value)
-        // mainViewModel.getFavorites()
+    LaunchedEffect(topBarTitle.value) {
+        if (topBarTitle.value == "Избранное") {
+            mainViewModel.getFavorites()
+        } else {
+            mainViewModel.getAllItemsByCategory(topBarTitle.value)
+        }
     }
 
     ModalNavigationDrawer(
@@ -58,7 +61,7 @@ fun MainScreen(
         content = {
             Scaffold(
                 topBar = {
-                    MainTopBar(title = topBarTitle.value, drawerState = drawerState){
+                    MainTopBar(title = topBarTitle.value, drawerState = drawerState) {
                         topBarTitle.value = "Избранные"
                         mainViewModel.getFavorites()
                     }
