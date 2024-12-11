@@ -11,37 +11,30 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.room.Room
+import com.booknotes.db.BookDatabase
+import com.booknotes.db.BookRepository
+import com.booknotes.db.BookViewModel
 import com.booknotes.ui.theme.BookNotesTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize the database and repository
+        val db = Room.databaseBuilder(
+            applicationContext,
+            BookDatabase::class.java,
+            "book_db"
+        ).build()
+
+        val repository = BookRepository(db.bookDao())
+        val bookViewModel = BookViewModel(repository)
         enableEdgeToEdge()
         setContent {
             BookNotesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MyApp(bookViewModel)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BookNotesTheme {
-        Greeting("Android")
     }
 }
