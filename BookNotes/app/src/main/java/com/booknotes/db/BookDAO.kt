@@ -1,5 +1,6 @@
 package com.booknotes.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -10,7 +11,7 @@ import androidx.room.Update
 @Dao
 interface BookDAO {
     @Query("SELECT * FROM books")
-    fun getAllBooks(): List<Book>
+    fun getAllBooks(): LiveData<List<Book>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBook(book: Book)
