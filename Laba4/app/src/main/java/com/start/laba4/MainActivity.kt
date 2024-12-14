@@ -63,6 +63,7 @@ fun Picks(modifier: Modifier = Modifier) {
         }
     )
 
+
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission(),
         onResult = { isGranted ->
@@ -155,6 +156,7 @@ fun Picks(modifier: Modifier = Modifier) {
                 Text(text = "Сделать снимок")
             }
             Button(
+                modifier = Modifier.padding(bottom = 10.dp),
                 onClick = {
                     hasImage = false
                     imageUri = null
